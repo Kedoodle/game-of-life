@@ -2,10 +2,11 @@ namespace GameOfLife
 {
     public class Cell
     {
-        public Cell(int x, int y)
+        public Cell(int x, int y, States state)
         {
             X = x;
             Y = y;
+            State = state;
         }
 
         public int X { get; }

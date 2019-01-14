@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using GameOfLife;
 
 namespace GameOfLifeTests
@@ -10,22 +9,20 @@ namespace GameOfLifeTests
         {
             Width = width;
             Height = height;
-            Cells = new List<Cell>();
-            for (var x = 1; x <= Width; x++)
-            {
-                for (var y = 1; y <= Height; y++)
-                {
-                    Cells.Add(new Cell(x, y));
-                }
-            }
+            Cells = GenerateCellsList(Width, Height, States.Dead);
         }
 
         public int Width { get; }
         public int Height { get; }
         public List<Cell> Cells { get; }
 
-        
-        
-        
+        private static List<Cell> GenerateCellsList(int width, int height, States state)
+        {
+            var cells = new List<Cell>();
+            for (var x = 1; x <= width; x++)
+            for (var y = 1; y <= height; y++)
+                cells.Add(new Cell(x, y, state));
+            return cells;
+        }
     }
 }
