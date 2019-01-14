@@ -15,18 +15,4 @@ namespace GameOfLifeTests
             Assert.Equal(expected, actual);
         }
     }
-
-    public class World
-    {
-        public World(int width, int height)
-        {
-            Width = width;
-            Height = height;
-            Cells = new List<Cell>();
-        }
-
-        public int Width { get; }
-        public int Height { get; }
-        public List<Cell> Cells { get; }
-    }
 }
