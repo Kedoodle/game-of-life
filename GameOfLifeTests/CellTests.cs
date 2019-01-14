@@ -6,7 +6,7 @@ namespace GameOfLifeTests
     public class CellShould
     {
         [Fact]
-        public void HaveXLocationProperty()
+        public void HaveXCoordinateProperty()
         {
             var cell = new Cell(1, 2, States.Live);
             const int expected = 1;
@@ -15,7 +15,7 @@ namespace GameOfLifeTests
         }
         
         [Fact]
-        public void HaveYLocationProperty()
+        public void HaveYCoordinateProperty()
         {
             var cell = new Cell(1, 2, States.Live);
             const int expected = 2;

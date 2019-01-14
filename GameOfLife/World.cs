@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GameOfLife;
 
 namespace GameOfLifeTests
@@ -23,6 +24,11 @@ namespace GameOfLifeTests
             for (var y = 1; y <= height; y++)
                 cells.Add(new Cell(x, y, state));
             return cells;
+        }
+
+        public Cell GetCell(int x, int y)
+        {
+            return Cells.FirstOrDefault(cell => cell.X == x && cell.Y == y);
         }
     }
 }
