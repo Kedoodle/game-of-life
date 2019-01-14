@@ -41,13 +41,25 @@ namespace GameOfLifeTests
             var rightX = cell.X == Width ? 1 : cell.X + 1;
             var topY = cell.Y == 1 ? Height : cell.Y - 1;
             var bottomY = cell.Y == Height ? 1 : cell.Y + 1;
-            var neighbouringCells = new List<Cell>
+            var neighbours = new List<Cell>
             {
                 GetCell(leftX, topY), GetCell(cell.X, topY), GetCell(rightX, topY),
                 GetCell(leftX, cell.Y), GetCell(rightX, cell.Y),
                 GetCell(leftX, bottomY), GetCell(cell.X, bottomY), GetCell(rightX, bottomY)
             };
-            return neighbouringCells;
+            return neighbours;
+        }
+
+        public int GetNumberOfLiveNeighbours(Cell cell)
+        {
+            var neighbours = GetNeighbouringCells(cell);
+            return neighbours.Count(c => c.State == States.Live);
+        }
+
+        public bool ShouldCellToggle(Cell cell)
+        {
+            var neighbours = GetNumberOfLiveNeighbours(cell);
+            return cell.State == States.Live ? neighbours != 2 && neighbours != 3 : neighbours == 3;
         }
     }
 }
