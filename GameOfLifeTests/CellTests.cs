@@ -31,6 +31,16 @@ namespace GameOfLifeTests
             var actual = cell.State;
             Assert.Equal(expected, actual);
         }
+        
+       [Fact]
+        public void SwitchStatesWhenToggleStateIsCalled()
+        {
+            var cell = new Cell(1, 2, States.Dead);
+            cell.ToggleState();
+            const States expected = States.Live;
+            var actual = cell.State;
+            Assert.Equal(expected, actual);
+        }
 
     }
 }

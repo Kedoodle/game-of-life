@@ -12,6 +12,11 @@ namespace GameOfLife
         public int X { get; }
         public int Y { get; }
         public States State { get; set; }
+
+        public void ToggleState()
+        {
+            State = State == States.Dead ? States.Live : States.Dead;
+        }
     }
 
     public enum States
