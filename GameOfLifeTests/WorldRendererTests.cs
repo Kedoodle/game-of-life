@@ -11,7 +11,7 @@ namespace GameOfLifeTests
             _world.GetCell(2, 3).ToggleState();
             _world.GetCell(3, 3).ToggleState();
             _world.GetCell(4, 3).ToggleState();
-            _worldRenderer = new WorldRenderer();
+            _worldRenderer = new WorldRenderer(_world);
         }
 
         private readonly World _world;
@@ -26,7 +26,7 @@ namespace GameOfLifeTests
                            ". + + + . \n" +
                            ". . . . . \n" +
                            ". . . . . \n";
-            var actual = _worldRenderer.GetWorldAsString(_world);
+            var actual = _worldRenderer.GetWorldAsString();
             Assert.Equal(expected, actual);
         }
     }

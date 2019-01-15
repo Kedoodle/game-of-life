@@ -7,19 +7,27 @@ namespace GameOfLife
 {
     public class WorldRenderer
     {
-        public void DisplayWorld(World world)
+
+        public WorldRenderer(World world)
         {
-            Console.Write(GetWorldAsString(world));
+            _world = world;
         }
 
-        public IEnumerable<char> GetWorldAsString(World world)
+        private readonly World _world;
+        
+        public void DisplayWorld()
+        {
+            Console.Write(GetWorldAsString());
+        }
+
+        public IEnumerable<char> GetWorldAsString()
         {
             var sb = new StringBuilder();
-            for (var y = 1; y <= world.Height; y++)
+            for (var y = 1; y <= _world.Height; y++)
             {
-                for (var x = 1; x <= world.Width; x++)
+                for (var x = 1; x <= _world.Width; x++)
                 {
-                    var cell = world.GetCell(x, y);
+                    var cell = _world.GetCell(x, y);
                     var state = cell.State;
                     sb.Append(state == States.Dead ? ". " : "+ ");
                 }
