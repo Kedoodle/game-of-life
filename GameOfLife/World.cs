@@ -66,5 +66,10 @@ namespace GameOfLifeTests
         {
             return Cells.Where(ShouldCellToggle);
         }
+
+        public void NextGeneration()
+        {
+            GetCellsToToggle().ToList().ForEach(cell => cell.ToggleState());
+        }
     }
 }

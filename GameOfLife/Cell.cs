@@ -11,7 +11,7 @@ namespace GameOfLife
 
         public int X { get; }
         public int Y { get; }
-        public States State { get; set; }
+        public States State { get; private set; }
 
         public void ToggleState()
         {

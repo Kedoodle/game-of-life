@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using GameOfLife;
 using Xunit;
 
@@ -92,6 +95,21 @@ namespace GameOfLifeTests
                 World.GetCell(4, 3)
             };
             var actual = World.GetCellsToToggle();
+            Assert.Equal(expected, actual);
+        }
+        
+        [Theory]
+        [InlineData(3, 2, States.Live)]
+        [InlineData(2, 3, States.Dead)]
+        [InlineData(3, 3, States.Live)]
+        [InlineData(4, 3, States.Dead)]
+        [InlineData(3, 4, States.Live)]
+        public void IterateToNextGenerationWhenNextGenerationIsCalled(int x, int y, States state)
+        {
+            World.NextGeneration();
+            var cell = World.GetCell(x, y);
+            var expected = state;
+            var actual = cell.State;
             Assert.Equal(expected, actual);
         }
     }
