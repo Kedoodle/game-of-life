@@ -6,21 +6,21 @@ namespace GameOfLifeTests
 {
     public class WorldShould
     {
-        private readonly World World;
+        private readonly World _world;
         
         public WorldShould()
         {
-            World = new World(5, 5);
-            World.GetCell(2, 3).ToggleState();
-            World.GetCell(3, 3).ToggleState();
-            World.GetCell(4, 3).ToggleState();
+            _world = new World(5, 5);
+            _world.GetCell(2, 3).ToggleState();
+            _world.GetCell(3, 3).ToggleState();
+            _world.GetCell(4, 3).ToggleState();
         }
         
         [Fact]
         public void HaveCellsProperty()
         {
             var expected = typeof(List<Cell>);
-            var actual = World.Cells.GetType();
+            var actual = _world.Cells.GetType();
             Assert.Equal(expected, actual);
         }
         
@@ -28,14 +28,14 @@ namespace GameOfLifeTests
         public void GenerateDeadCellsToPopulateCellsProperty()
         {
             const int expected = 25;
-            var actual = World.Cells.Count;
+            var actual = _world.Cells.Count;
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void TakeCoordinatesAndReturnCell()
         {
-            var cell = World.GetCell(1, 2);
+            var cell = _world.GetCell(1, 2);
             const int expectedX = 1;
             const int expectedY = 2;
             var actualX = cell.X;
@@ -47,23 +47,23 @@ namespace GameOfLifeTests
         [Fact]
         public void TakeCellAndReturnListOfNeighbouringCells()
         {       
-            var cell = World.GetCell(3, 3);
+            var cell = _world.GetCell(3, 3);
             var expected = new List<Cell>
             {
-                World.GetCell(2, 2), World.GetCell(3, 2), World.GetCell(4, 2),
-                World.GetCell(2, 3), World.GetCell(4, 3),
-                World.GetCell(2, 4), World.GetCell(3, 4), World.GetCell(4, 4)
+                _world.GetCell(2, 2), _world.GetCell(3, 2), _world.GetCell(4, 2),
+                _world.GetCell(2, 3), _world.GetCell(4, 3),
+                _world.GetCell(2, 4), _world.GetCell(3, 4), _world.GetCell(4, 4)
             };
-            var actual = World.GetNeighbouringCells(cell);
+            var actual = _world.GetNeighbouringCells(cell);
             Assert.Equal(expected, actual);
         }
         
         [Fact]
         public void TakeCellAndReturnNumberOfLiveNeighbouringCells()
         { 
-            var cell = World.GetCell(3, 3);
+            var cell = _world.GetCell(3, 3);
             const int expected = 2;
-            var actual = World.GetNumberOfLiveNeighbours(cell);
+            var actual = _world.GetNumberOfLiveNeighbours(cell);
             Assert.Equal(expected, actual);
         }
         
@@ -75,9 +75,9 @@ namespace GameOfLifeTests
         [InlineData(3, 4, true)]
         public void TakeCellAndDetermineIfStateShouldToggle(int x, int y, bool shouldToggle)
         {
-            var cell = World.GetCell(x, y);
+            var cell = _world.GetCell(x, y);
             var expected = shouldToggle;
-            var actual = World.ShouldCellToggle(cell);
+            var actual = _world.ShouldCellToggle(cell);
             Assert.Equal(expected, actual);
         }
         
@@ -86,12 +86,12 @@ namespace GameOfLifeTests
         {
             var expected = new List<Cell>
             {
-                World.GetCell(2, 3),
-                World.GetCell(3, 2),
-                World.GetCell(3, 4),
-                World.GetCell(4, 3)
+                _world.GetCell(2, 3),
+                _world.GetCell(3, 2),
+                _world.GetCell(3, 4),
+                _world.GetCell(4, 3)
             };
-            var actual = World.GetCellsToToggle();
+            var actual = _world.GetCellsToToggle();
             Assert.Equal(expected, actual);
         }
         
@@ -103,8 +103,8 @@ namespace GameOfLifeTests
         [InlineData(3, 4, States.Live)]
         public void IterateToNextGenerationWhenNextGenerationIsCalled(int x, int y, States state)
         {
-            World.NextGeneration();
-            var cell = World.GetCell(x, y);
+            _world.NextGeneration();
+            var cell = _world.GetCell(x, y);
             var expected = state;
             var actual = cell.State;
             Assert.Equal(expected, actual);

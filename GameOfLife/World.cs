@@ -13,8 +13,8 @@ namespace GameOfLifeTests
             Cells = GenerateCells(Width, Height, States.Dead);
         }
 
-        private int Width { get; }
-        private int Height { get; }
+        public int Width { get; }
+        public int Height { get; }
         public List<Cell> Cells { get; }
 
         private static List<Cell> GenerateCells(int width, int height, States state)
