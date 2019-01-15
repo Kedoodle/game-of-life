@@ -13,8 +13,8 @@ namespace GameOfLifeTests
             Cells = GenerateCells(Width, Height, States.Dead);
         }
 
-        public int Width { get; }
-        public int Height { get; }
+        private int Width { get; }
+        private int Height { get; }
         public List<Cell> Cells { get; }
 
         private static List<Cell> GenerateCells(int width, int height, States state)
@@ -58,8 +58,8 @@ namespace GameOfLifeTests
 
         public bool ShouldCellToggle(Cell cell)
         {
-            var neighbours = GetNumberOfLiveNeighbours(cell);
-            return cell.State == States.Live ? neighbours != 2 && neighbours != 3 : neighbours == 3;
+            var liveNeighbours = GetNumberOfLiveNeighbours(cell);
+            return cell.State == States.Live ? liveNeighbours != 2 && liveNeighbours != 3 : liveNeighbours == 3;
         }
 
         public IEnumerable<Cell> GetCellsToToggle()
