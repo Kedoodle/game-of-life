@@ -37,7 +37,17 @@ namespace GameOfLife
                 if (input == "s" || input == "start") break;
                 var x = _inputHandler.GetFirstParameter(input, ',');
                 var y = _inputHandler.GetSecondParameter(input, ',');
-                World.GetCell(x, y).ToggleState();
+                var cell = World.GetCell(x, y);
+                if (cell != null)
+                {
+                    cell.ToggleState();
+                }
+                else
+                {
+                    Console.Write("No such cell exists! ");
+                    continue;
+                }
+
                 _worldRenderer.DisplayWorld(World);
             }
         }
@@ -86,15 +96,4 @@ namespace GameOfLife
         }
     }
 
-    internal class Input
-    {
-        public Input(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public int X { get; }
-        public int Y { get; }
-    }
 }
