@@ -10,14 +10,14 @@ namespace GameOfLifeTests
         {
             Width = width;
             Height = height;
-            Cells = GenerateCellsList(Width, Height, States.Dead);
+            Cells = GenerateCells(Width, Height, States.Dead);
         }
 
         public int Width { get; }
         public int Height { get; }
         public List<Cell> Cells { get; }
 
-        private static List<Cell> GenerateCellsList(int width, int height, States state)
+        private static List<Cell> GenerateCells(int width, int height, States state)
         {
             var cells = new List<Cell>();
             for (var x = 1; x <= width; x++)
@@ -60,6 +60,11 @@ namespace GameOfLifeTests
         {
             var neighbours = GetNumberOfLiveNeighbours(cell);
             return cell.State == States.Live ? neighbours != 2 && neighbours != 3 : neighbours == 3;
+        }
+
+        public IEnumerable<Cell> GetCellsToToggle()
+        {
+            return Cells.Where(ShouldCellToggle);
         }
     }
 }
