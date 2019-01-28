@@ -3,30 +3,30 @@ using Xunit;
 
 namespace GameOfLifeTests
 {
-    public class WorldRendererShould
+    public class ConsoleWorldRendererShould
     {
-        public WorldRendererShould()
+        public ConsoleWorldRendererShould()
         {
             _world = new World(5, 5);
             _world.GetCell(2, 3).ToggleState();
             _world.GetCell(3, 3).ToggleState();
             _world.GetCell(4, 3).ToggleState();
-            _worldRenderer = new WorldRenderer(_world);
+            _consoleWorldRenderer = new ConsoleWorldRenderer();
         }
 
         private readonly World _world;
-        private readonly WorldRenderer _worldRenderer;
+        private readonly ConsoleWorldRenderer _consoleWorldRenderer;
 
         [Fact]
         public void TakeWorldAndReturnStringRepresentation()
         {
             
-            var expected = ". . . . . \n" +
-                           ". . . . . \n" +
-                           ". + + + . \n" +
-                           ". . . . . \n" +
-                           ". . . . . \n";
-            var actual = _worldRenderer.GetWorldAsString();
+            const string expected = ". . . . . \n" +
+                                    ". . . . . \n" +
+                                    ". + + + . \n" +
+                                    ". . . . . \n" +
+                                    ". . . . . \n";
+            var actual = _consoleWorldRenderer.GetWorldAsString(_world);
             Assert.Equal(expected, actual);
         }
     }

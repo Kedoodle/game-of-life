@@ -41,10 +41,12 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="IWorldRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="World.cs" />
-    <Compile Include="WorldRenderer.cs" />
+    <Compile Include="WorldEvaluator.cs" />
+    <Compile Include="ConsoleWorldRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

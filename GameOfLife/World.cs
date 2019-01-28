@@ -6,11 +6,20 @@ namespace GameOfLifeTests
 {
     public class World
     {
+        
+         // todo contstuctor which takes in a predefined world 
+        // todo As string + as list of cells and size
         public World(int width, int height)
         {
             Width = width;
             Height = height;
             Cells = GenerateCells(Width, Height, States.Dead);
+        }
+
+        public World(string worldString)
+        {
+            
+            // todo Creating a world via a string
         }
 
         public int Width { get; }
@@ -34,42 +43,6 @@ namespace GameOfLifeTests
         {
             return Cells.SingleOrDefault(cell => cell.X == x && cell.Y == y);
         }
-
-        public IEnumerable<Cell> GetNeighbouringCells(Cell cell)
-        {
-            var leftX = cell.X == 1 ? Width : cell.X - 1;
-            var rightX = cell.X == Width ? 1 : cell.X + 1;
-            var topY = cell.Y == 1 ? Height : cell.Y - 1;
-            var bottomY = cell.Y == Height ? 1 : cell.Y + 1;
-            var neighbours = new List<Cell>
-            {
-                GetCell(leftX, topY), GetCell(cell.X, topY), GetCell(rightX, topY),
-                GetCell(leftX, cell.Y), GetCell(rightX, cell.Y),
-                GetCell(leftX, bottomY), GetCell(cell.X, bottomY), GetCell(rightX, bottomY)
-            };
-            return neighbours;
-        }
-
-        public int GetNumberOfLiveNeighbours(Cell cell)
-        {
-            var neighbours = GetNeighbouringCells(cell);
-            return neighbours.Count(c => c.State == States.Live);
-        }
-
-        public bool ShouldCellToggle(Cell cell)
-        {
-            var liveNeighbours = GetNumberOfLiveNeighbours(cell);
-            return cell.State == States.Live ? liveNeighbours != 2 && liveNeighbours != 3 : liveNeighbours == 3;
-        }
-
-        public IEnumerable<Cell> GetCellsToToggle()
-        {
-            return Cells.Where(ShouldCellToggle);
-        }
-
-        public void NextGeneration()
-        {
-            GetCellsToToggle().ToList().ForEach(cell => cell.ToggleState());
-        }
+        
     }
 }

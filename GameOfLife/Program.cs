@@ -4,7 +4,8 @@
     {
         public static void Main(string[] args)
         {
-            var game = new Game();
+            var consoleWorldRenderer = new ConsoleWorldRenderer();
+            var game = new Game(consoleWorldRenderer);
             game.Initialise();
             game.Start();
         }
