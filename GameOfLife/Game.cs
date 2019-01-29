@@ -24,28 +24,17 @@ namespace GameOfLife
             _worldEvaluator = new WorldEvaluator(World);
         }
 
-        public void Start()
+        private void InitialiseWorld()
         {
-            var generation = 0;
-            var input = GetInput(
-                "The Game of Life has started! Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
-            var autoGenerate = input == "a";
-            while (true)
-            {
-                _worldEvaluator.NextGeneration();
-                Console.WriteLine($"Generation: {++generation}");
-                _worldRenderer.DisplayWorld(World);
-                if (autoGenerate)
-                    Thread.Sleep(1000);
-                else
-                {
-                    GetInput(
-                        "Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
-                    autoGenerate = input == "a";
-                }
-            }
+            var input = GetInput("Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
+            while (!IsValidInput(input, 'x'))
+                input = GetInput(
+                    "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
+            var dimensions = GetDimensions(input);
+            World = new World(dimensions.width, dimensions.height);
+            _worldRenderer.DisplayWorld(World);
         }
-
+        
         private void SetInitialWorldState()
         {
             var shouldStart = false;
@@ -73,16 +62,27 @@ namespace GameOfLife
                 _worldRenderer.DisplayWorld(World);
             }
         }
-
-        private void InitialiseWorld() // todo sequential methods
+        
+        public void Start()
         {
-            var input = GetInput("Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            while (!IsValidInput(input, 'x'))
-                input = GetInput(
-                    "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            var dimensions = GetDimensions(input);
-            World = new World(dimensions.width, dimensions.height);
-            _worldRenderer.DisplayWorld(World);
+            var generation = 0;
+            var input = GetInput(
+                "The Game of Life has started! Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
+            var autoGenerate = input == "a";
+            while (true)
+            {
+                _worldEvaluator.NextGeneration();
+                Console.WriteLine($"Generation: {++generation}");
+                _worldRenderer.DisplayWorld(World);
+                if (autoGenerate)
+                    Thread.Sleep(1000);
+                else
+                {
+                    GetInput(
+                        "Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
+                    autoGenerate = input == "a";
+                }
+            }
         }
     }
 }
