@@ -17,8 +17,8 @@ namespace GameOfLife
         {
             if (input.Count(c => c == separator) != 1) return false;
             var index = input.IndexOf(separator);
-            return int.TryParse(input.Substring(0, index), out var x) &&
-                   int.TryParse(input.Substring(index + 1), out var y);
+            return int.TryParse(input.Substring(0, index), out var x) && x >= 1 &&
+                   int.TryParse(input.Substring(index + 1), out var y) && y >= 1;
         }
 
         public static (int width, int height) GetDimensions(string input)
