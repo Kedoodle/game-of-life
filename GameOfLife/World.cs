@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using GameOfLife;
 
 namespace GameOfLifeTests
@@ -7,8 +9,6 @@ namespace GameOfLifeTests
     public class World
     {
         
-         // todo contstuctor which takes in a predefined world 
-        // todo As string + as list of cells and size
         public World(int width, int height)
         {
             Width = width;
@@ -18,8 +18,16 @@ namespace GameOfLifeTests
 
         public World(string worldString)
         {
-            
-            // todo Creating a world via a string
+            Width = worldString.IndexOf("\n", StringComparison.Ordinal) / 2;
+            Height = Regex.Matches(worldString, "\n").Count;
+            Cells = new List<Cell>();
+            for (var x = 1; x <= Width; x++)
+            {
+                for (var y = 1; y <= Height; y++)
+                {
+                    Cells.Add(new Cell(x, y, worldString.Substring((2*Width+1) * (y-1) + 2*(x-1), 1) == "." ? States.Dead : States.Live));
+                }
+            }
         }
 
         public int Width { get; }

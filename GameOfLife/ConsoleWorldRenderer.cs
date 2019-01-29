@@ -14,7 +14,7 @@ namespace GameOfLife
             Console.Write(GetWorldAsString(world));
         }
 
-        public IEnumerable<char> GetWorldAsString(World world)
+        public string GetWorldAsString(World world)
         {
             var sb = new StringBuilder();
             for (var y = 1; y <= world.Height; y++)

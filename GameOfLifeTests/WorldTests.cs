@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using GameOfLife;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GameOfLifeTests
 {
     public class WorldShould
     {
-        private readonly World _world;
+        private World _world;
         
         public WorldShould()
         {
@@ -44,6 +45,19 @@ namespace GameOfLifeTests
             Assert.Equal(expectedY, actualY);
         }
 
-        
+        [Fact]
+        public void TakeWorldStringAndGenerateCells()
+        {
+            const string expected = ". . . . . \n" +
+                                    ". . . . . \n" +
+                                    ". + + + . \n" +
+                                    ". . . . . \n" +
+                                    ". . . . . \n";
+            var consoleWorldRenderer = new ConsoleWorldRenderer();
+            _world = new World(expected);
+            var actual = consoleWorldRenderer.GetWorldAsString(_world);
+            Assert.Equal(expected, actual);
+        }
+
     }
 }
