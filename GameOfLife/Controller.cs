@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GameOfLife
 {
-    public class Controller // todo Maybe improve this name or extract out into separate things which can be named better
+    public static class Controller
     {
         public static string GetInput(string query)
         {
@@ -13,7 +13,7 @@ namespace GameOfLife
             return input;
         }
 
-        public static bool IsValidInput(string input, char separator) // todo input > 0
+        public static bool IsValidInput(string input, char separator)
         {
             if (input.Count(c => c == separator) != 1) return false;
             var index = input.IndexOf(separator);
