@@ -38,8 +38,11 @@ namespace GameOfLife
                 if (autoGenerate)
                     Thread.Sleep(1000);
                 else
+                {
                     GetInput(
-                        "Press enter to move to the next generation, or enter 'q' to quit: ");
+                        "Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
+                    autoGenerate = input == "a";
+                }
             }
         }
 
