@@ -26,7 +26,7 @@ namespace GameOfLifeTests
                                     ". + + + . \n" +
                                     ". . . . . \n" +
                                     ". . . . . \n";
-            var actual = _consoleWorldRenderer.GetWorldAsString(_world);
+            var actual = ConsoleWorldRenderer.GetWorldAsString(_world);
             Assert.Equal(expected, actual);
         }
     }

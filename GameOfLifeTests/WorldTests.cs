@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameOfLife;
 using Xunit;
+using static GameOfLife.ConsoleWorldRenderer;
 
 namespace GameOfLifeTests
 {
@@ -54,9 +55,8 @@ namespace GameOfLifeTests
                                     ". + + + . \n" +
                                     ". . . . . \n" +
                                     ". . . . . \n";
-            var consoleWorldRenderer = new ConsoleWorldRenderer();
             _world = new World(expected);
-            var actual = consoleWorldRenderer.GetWorldAsString(_world);
+            var actual = GetWorldAsString(_world);
             Assert.Equal(expected, actual);
         }
 
