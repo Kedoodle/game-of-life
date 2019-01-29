@@ -43,14 +43,13 @@ namespace GameOfLife
             {
                 var input = Controller.GetInput(
                     "Enter cell coordinates '<x>,<y>' to toggle initial state, 's' to start, or 'q' to quit: ");
-                while (input != "s" && input != "start" && !Controller.isValidInput(input, ','))
+                while (input != "s" && input != "start" && !Controller.IsValidInput(input, ','))
                     input = Controller.GetInput(
                         "Invalid input! Enter cell coordinates '<x>,<y>' to toggle initial state, 's' to start, or 'q' to quit: ");
 
                 if (input == "s" || input == "start") break; // todo Set the breaking condition i.e. "isStarted???"
-                var x = Controller.GetFirstParameter(input, ',');
-                var y = Controller.GetSecondParameter(input, ',');
-                var cell = World.GetCell(x, y);
+                var coordinates = Controller.GetCoordinates(input);
+                var cell = World.GetCell(coordinates.x, coordinates.y);
                 if (cell != null)
                 {
                     cell.ToggleState();
@@ -68,12 +67,11 @@ namespace GameOfLife
         private void InitialiseWorld() // todo sequential methods
         {
             var input = Controller.GetInput("Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            while (!Controller.isValidInput(input, 'x'))
+            while (!Controller.IsValidInput(input, 'x'))
                 input = Controller.GetInput(
                     "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            var width = Controller.GetFirstParameter(input, 'x');
-            var height = Controller.GetSecondParameter(input, 'x');
-            World = new World(width, height);
+            var dimensions = Controller.GetDimensions(input);
+            World = new World(dimensions.width, dimensions.height);
             _worldRenderer.DisplayWorld(World);
         }
     }

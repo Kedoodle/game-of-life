@@ -8,12 +8,12 @@ namespace GameOfLife
         public static string GetInput(string query)
         {
             Console.Write(query);
-            var input = Console.ReadLine().ToLower();
+            var input = Console.ReadLine()?.ToLower();
             if (input == "q" || input == "quit" || input == "exit") Environment.Exit(0);
             return input;
         }
 
-        public static bool isValidInput(string input, char separator) // todo input > 0
+        public static bool IsValidInput(string input, char separator) // todo input > 0
         {
             if (input.Count(c => c == separator) != 1) return false;
             var index = input.IndexOf(separator);
@@ -21,14 +21,14 @@ namespace GameOfLife
                    int.TryParse(input.Substring(index + 1), out var y);
         }
 
-        public static Tuple<int, int> GetDimensions(string input)
+        public static (int width, int height) GetDimensions(string input)
         {
-            return new Tuple<int, int>(GetFirstParameter(input, 'x'), GetSecondParameter(input, 'x'));
+            return (GetFirstParameter(input, 'x'), GetSecondParameter(input, 'x'));
         }
         
-        public static Tuple<int, int> GetCoordinates(string input)
+        public static (int x, int y) GetCoordinates(string input)
         {
-            return new Tuple<int, int>(GetFirstParameter(input, ','), GetSecondParameter(input, ','));
+            return (GetFirstParameter(input, ','), GetSecondParameter(input, ','));
         }
         
         private static int GetFirstParameter(string input, char separator)
