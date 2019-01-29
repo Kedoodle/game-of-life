@@ -20,18 +20,27 @@ namespace GameOfLife
         public void Initialise()
         {
             InitialiseWorld();
-            SetInitialWorldState();
             _worldEvaluator = new WorldEvaluator(World);
         }
 
         private void InitialiseWorld()
         {
-            var input = GetInput("Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            while (!IsValidInput(input, 'x'))
-                input = GetInput(
-                    "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
-            var dimensions = GetDimensions(input);
-            World = new World(dimensions.width, dimensions.height);
+            var input = GetInput("Enter desired world dimensions '<width>x<height>', 's' for string initialisation, or 'q' to quit: ");
+            var isWorldString = input == "s";
+            if (isWorldString)
+            {
+                input = GetInput("Enter desired world in string format '. . . \\nx x x \\n. . . \\n' or 'q' to quit: ");
+                World = new World(input.Replace("\\n", "\n"));
+            }
+            else
+            {
+                while (!IsValidInput(input, 'x'))
+                    input = GetInput(
+                        "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
+                var dimensions = GetDimensions(input);
+                World = new World(dimensions.width, dimensions.height);
+                SetInitialWorldState();
+            }
             _worldRenderer.DisplayWorld(World);
         }
         

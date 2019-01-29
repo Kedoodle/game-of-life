@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GameOfLife;
 
-namespace GameOfLifeTests
+namespace GameOfLife
 {
     public class World
     {
