@@ -31,6 +31,7 @@ namespace GameOfLife
             {
                 input = GetInput("Enter desired world in string format '. . . \\nx x x \\n. . . \\n' or 'q' to quit: ");
                 World = new World(input.Replace("\\n", "\n"));
+                _worldRenderer.DisplayWorld(World);
             }
             else
             {
@@ -39,9 +40,9 @@ namespace GameOfLife
                         "Invalid input! Enter desired world dimensions '<width>x<height>' or 'q' to quit: ");
                 var dimensions = GetDimensions(input);
                 World = new World(dimensions.width, dimensions.height);
+                _worldRenderer.DisplayWorld(World);
                 SetInitialWorldState();
             }
-            _worldRenderer.DisplayWorld(World);
         }
         
         private void SetInitialWorldState()
@@ -87,7 +88,7 @@ namespace GameOfLife
                     Thread.Sleep(1000);
                 else
                 {
-                    GetInput(
+                    input = GetInput(
                         "Press enter to move to the next generation, enter 'a' to automatically move through generations, or enter 'q' to quit: ");
                     autoGenerate = input == "a";
                 }
