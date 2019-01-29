@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameOfLife;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GameOfLifeTests
 {
@@ -11,10 +10,12 @@ namespace GameOfLifeTests
         
         public WorldShould()
         {
-            _world = new World(5, 5);
-            _world.GetCell(2, 3).ToggleState();
-            _world.GetCell(3, 3).ToggleState();
-            _world.GetCell(4, 3).ToggleState();
+            const string worldString = ". . . . . \n" +
+                                       ". . . . . \n" +
+                                       ". + + + . \n" +
+                                       ". . . . . \n" +
+                                       ". . . . . \n";
+            _world = new World(worldString);
         }
         
         [Fact]
